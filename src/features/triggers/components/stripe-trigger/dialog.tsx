@@ -76,7 +76,7 @@ export const StripeTriggerDialog = ({
                             </Button>
                         </div>
                     </div>
-                    <div className="rounded-lg bg-muted p-4 space-y-2">
+                    <div className="rounded-lg bg-muted p-4 space-y-2 -mt-5">
                         <h4 className="font-medium text-sm">Setup instructions:</h4>
                         <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
                             <li>Open your Stripe Dashboard</li>
@@ -88,7 +88,7 @@ export const StripeTriggerDialog = ({
                         </ol>
                     </div>
 
-                    <div className="rounded-lg bg-muted p-4 space-y-2">
+                    <div className="rounded-lg bg-muted p-4 space-y-2 -mt-8">
                         <h4 className="font-medium text-sm">Available Variables</h4>
                         <ul className="text-sm text-muted-foreground space-y-1">
                             <li>

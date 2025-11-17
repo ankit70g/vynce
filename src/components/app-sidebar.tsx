@@ -22,6 +22,10 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
+// ⭐ Add this import
+import { useSidebar } from "@/components/ui/sidebar";
+
 import { authClient } from "@/lib/auth-client";
 import { useHasActiveSubscription } from "@/features/subscriptions/hooks/use-subscription";
 
@@ -52,18 +56,27 @@ export const AppSidebar = () => {
     const router = useRouter();
     const pathname = usePathname();
     const { hasActiveSubscription, isLoading } = useHasActiveSubscription();
+
+    // ⭐ Sidebar open/close controller
+    const { setOpen } = useSidebar();
+
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
                 <SidebarMenuItem>
-                    <SidebarMenuButton asChild className="gap-x-4 h-10 px-4">
-                        <Link href="/" prefetch>
+                    <SidebarMenuButton asChild className="gap-x-1 h-10 px-4 justify-center">
+                        <Link
+                            href="/"
+                            prefetch
+                            onClick={() => setOpen(false)}   // ⭐ Auto-close
+                        >
                             <Image src="/logos/logo.svg" alt="Vynce" width={30} height={30} />
                             <span className="font-semibold text-sm">Vynce</span>
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
             </SidebarHeader>
+
             <SidebarContent>
                 {menuItems.map((group) => (
                     <SidebarGroup key={group.title}>
@@ -81,7 +94,11 @@ export const AppSidebar = () => {
                                             asChild
                                             className="gap-x-4 h-10 px-4"
                                         >
-                                            <Link href={item.url} prefetch>
+                                            <Link
+                                                href={item.url}
+                                                prefetch
+                                                onClick={() => setOpen(false)}   // ⭐ Auto-close
+                                            >
                                                 <item.icon className="size-4" />
                                                 <span>{item.title}</span>
                                             </Link>
@@ -93,6 +110,7 @@ export const AppSidebar = () => {
                     </SidebarGroup>
                 ))}
             </SidebarContent>
+
             <SidebarFooter>
                 <SidebarMenu>
                     {!hasActiveSubscription && !isLoading && (
@@ -100,34 +118,45 @@ export const AppSidebar = () => {
                             <SidebarMenuButton
                                 tooltip="Upgrade to Pro"
                                 className="gap-x-4 h-10 px-4"
-                                onClick={() => authClient.checkout({ slug: "pro" })}
+                                onClick={() => {
+                                    authClient.checkout({ slug: "pro" });
+                                    setOpen(false);   // ⭐ Auto-close
+                                }}
                             >
                                 <StarIcon className="h-4 w-4" />
                                 <span>Upgrade to Pro</span>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     )}
+
                     <SidebarMenuItem>
                         <SidebarMenuButton
                             tooltip="Billing Portal"
                             className="gap-x-4 h-10 px-4"
-                            onClick={() => authClient.customer.portal()}
+                            onClick={() => {
+                                authClient.customer.portal();
+                                setOpen(false);   // ⭐ Auto-close
+                            }}
                         >
                             <CreditCardIcon className="h-4 w-4" />
                             <span>Billing Portal</span>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
+
                     <SidebarMenuItem>
                         <SidebarMenuButton
                             tooltip="Sign out"
                             className="gap-x-4 h-10 px-4"
-                            onClick={() => authClient.signOut({
-                                fetchOptions: {
-                                    onSuccess: () => {
-                                        router.push("/login");
+                            onClick={() =>
+                                authClient.signOut({
+                                    fetchOptions: {
+                                        onSuccess: () => {
+                                            setOpen(false);   // ⭐ Auto-close
+                                            router.push("/login");
+                                        },
                                     },
-                                },
-                            })}
+                                })
+                            }
                         >
                             <LogOutIcon className="h-4 w-4" />
                             <span>Sign Out</span>
@@ -136,5 +165,5 @@ export const AppSidebar = () => {
                 </SidebarMenu>
             </SidebarFooter>
         </Sidebar>
-    )
+    );
 };

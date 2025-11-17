@@ -97,20 +97,20 @@ export const DiscordDialog = ({
                     <DialogTitle>
                         Discord Configuration
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="-mt-1.5">
                         Configure the Discord webhook settings for this node.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(handleSubmit)}
-                        className="space-y-1 mt-4"
+                        className="space-y-1"
                     >
                         <FormField
                             control={form.control}
                             name="variableName"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="-mt-0.5">
                                     <FormLabel>Variable Name</FormLabel>
                                     <FormControl>
                                         <Input
@@ -118,7 +118,7 @@ export const DiscordDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         Use this name to reference the result in other nodes:{" "}
                                         {`{{${watchVariableName}.text}}`}
                                     </FormDescription>
@@ -131,7 +131,7 @@ export const DiscordDialog = ({
                             control={form.control}
                             name="webhookUrl"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="mt-3">
                                     <FormLabel>Webhook URL</FormLabel>
                                     <FormControl>
                                         <Input
@@ -139,7 +139,7 @@ export const DiscordDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         Get this from Discord: Channel Settings ➔ Integrations ➔ Webhooks
                                     </FormDescription>
                                     <FormMessage />
@@ -151,7 +151,7 @@ export const DiscordDialog = ({
                             control={form.control}
                             name="content"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="mt-3">
                                     <FormLabel>Message Content</FormLabel>
                                     <FormControl>
                                         <Textarea
@@ -160,7 +160,7 @@ export const DiscordDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         The message to send. Use {"{{variable}}"} for simple values or {"{{json variable}}"} to stringify objects
                                     </FormDescription>
                                     <FormMessage />
@@ -171,7 +171,7 @@ export const DiscordDialog = ({
                             control={form.control}
                             name="username"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="mt-3">
                                     <FormLabel>Bot Username (Optional)</FormLabel>
                                     <FormControl>
                                         <Input
@@ -179,7 +179,7 @@ export const DiscordDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         Override the webhook's default username
                                     </FormDescription>
                                     <FormMessage />

@@ -93,20 +93,20 @@ export const SlackDialog = ({
                     <DialogTitle>
                         Slack Configuration
                     </DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription className="-mt-1.5">
                         Configure the Slack webhook settings for this node.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit(handleSubmit)}
-                        className="space-y-1 mt-4"
+                        className="space-y-1"
                     >
                         <FormField
                             control={form.control}
                             name="variableName"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="-mt-0.5">
                                     <FormLabel>Variable Name</FormLabel>
                                     <FormControl>
                                         <Input
@@ -114,7 +114,7 @@ export const SlackDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         Use this name to reference the result in other nodes:{" "}
                                         {`{{${watchVariableName}.text}}`}
                                     </FormDescription>
@@ -127,7 +127,7 @@ export const SlackDialog = ({
                             control={form.control}
                             name="webhookUrl"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="mt-3">
                                     <FormLabel>Webhook URL</FormLabel>
                                     <FormControl>
                                         <Input
@@ -135,10 +135,10 @@ export const SlackDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         Get this from Slack: Workspace Settings ➔ Workflows ➔ Webhooks
                                     </FormDescription>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         Make sure you have "content" variable
                                     </FormDescription>
                                     <FormMessage />
@@ -150,7 +150,7 @@ export const SlackDialog = ({
                             control={form.control}
                             name="content"
                             render={({ field }) => (
-                                <FormItem>
+                                <FormItem className="mt-3">
                                     <FormLabel>Message Content</FormLabel>
                                     <FormControl>
                                         <Textarea
@@ -159,7 +159,7 @@ export const SlackDialog = ({
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormDescription>
+                                    <FormDescription className="-mt-1.5">
                                         The message to send. Use {"{{variable}}"} for simple values or {"{{json variable}}"} to stringify objects
                                     </FormDescription>
                                     <FormMessage />
